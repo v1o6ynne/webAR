@@ -5,48 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <title>WebAR — Extract & View in AR</title>
+  <title>WebAR — Brain Model</title>
   <link rel="stylesheet" href="styles.css" />
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body>
   <div id="app">
-    <!-- Home: Upload -->
-    <main id="page-home" class="page active">
+    <main class="page">
       <header class="header">
         <h1>WebAR</h1>
-        <p class="tagline">Upload a photo, extract the subject, view in AR</p>
+        <p class="tagline">View the brain model in AR</p>
       </header>
-      <section class="upload-section">
-        <input type="file" id="photo-input" accept="image/*" capture="environment" />
-        <label for="photo-input" class="upload-label">
-          <span class="upload-icon" aria-hidden="true">📷</span>
-          <span class="upload-text">Choose from photo library</span>
-          <span class="upload-hint">or take a photo</span>
-        </label>
-      </section>
-      <p class="tip">Works best in Safari on iPhone. Use a clear photo of a person or object.</p>
-    </main>
-
-    <!-- Process: Extracted object + View in AR -->
-    <main id="page-process" class="page">
-      <header class="header compact">
-        <button type="button" class="back-btn" id="back-btn" aria-label="Back">← Back</button>
-        <h2>Extracted object</h2>
-      </header>
-      <section class="result-section">
-        <div class="result-canvas-wrap">
-          <canvas id="result-canvas"></canvas>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn primary" id="view-ar-btn">View in AR</button>
-        </div>
-      </section>
-      <section id="ar-section" class="ar-section hidden">
-        <p class="ar-hint">Point your camera. The object is placed in the scene.</p>
+      <section class="ar-section">
+        <p class="ar-hint">Tap "View in AR" to place the model in your space (iOS: Quick Look; Android: Scene Viewer).</p>
         <div class="model-viewer-wrap">
           <model-viewer
             id="model-viewer"
+            src="whole_brain_optimized.glb"
             ar
             ar-modes="webxr quick-look"
             camera-controls
@@ -54,25 +29,14 @@
             shadow-intensity="1"
             environment-image="neutral"
             exposure="1"
-            style="width:100%;height:60vh;min-height:300px;"
+            style="width:100%;height:70vh;min-height:300px;"
           >
             <button slot="ar-button" class="ar-button">View in AR</button>
           </model-viewer>
         </div>
-        <p class="ar-fallback-hint" id="ar-fallback-hint"></p>
       </section>
     </main>
-
-    <!-- Loading overlay -->
-    <div id="loading" class="loading-overlay hidden">
-      <div class="spinner"></div>
-      <p id="loading-text">Processing…</p>
-    </div>
-
-    <!-- Error toast -->
-    <div id="error-toast" class="toast hidden" role="alert"></div>
   </div>
-
   <script type="module" src="app.js"></script>
 </body>
 </html>
